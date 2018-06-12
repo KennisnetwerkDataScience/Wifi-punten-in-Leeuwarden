@@ -1,19 +1,12 @@
 import matplotlib.pyplot as plt
 
-from util import load_data
+from util import *
 
 
 def count_of_counts(df):
     df_user_seen_count = df.groupby('code_address')['DateTimeLocal'].agg(['count']).sort_values(['count'], ascending=False)
     s_count_of_counts = df_user_seen_count['count'].value_counts()
     return s_count_of_counts
-
-def plot_count_of_counts(s_count_of_counts):
-    plt.xscale('log')
-    plt.yscale('log')
-    s_count_of_counts.plot.line()
-    plt.show()
-
 
 if __name__ == "__main__":
     expected_num_entries = 32394696
@@ -27,4 +20,7 @@ if __name__ == "__main__":
     assert num_sensors(df) == expected_num_sensors
 
     coc = count_of_counts(df)
-    plot(coc)
+    fig = coc.plot(style='.', logx=True, logy=True, figsize=(10,10))
+    fig.set_xlabel('count')
+    fig.set_ylabel('times device seen')
+    plt.savefig('results/count_of_counts.png')
