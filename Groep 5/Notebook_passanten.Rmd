@@ -1,0 +1,277 @@
+---
+title: "Groep 5: type passanten"
+output:
+  html_document:
+    df_print: paged
+---
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(knitr)
+library(lubridate)
+
+loc <- read.csv('~/OpenData/leeuwarden_data/locatus/locatusdata_bewerkt.csv', sep = ';') %>% 
+  as_tibble() %>%
+  mutate(DateTimeLocal = ymd_hms(DateTimeLocal),
+         uur = hour(DateTimeLocal),
+         dagdeel = ifelse(uur < 6, 'nacht',
+                         ifelse(uur < 12, 'ochtend',
+                                ifelse(uur < 18, 'middag', 'avond'))),
+         dagdeel = factor(dagdeel, c('ochtend', 'middag', 'avond', 'nacht'), ordered = T),
+         weekdag = wday(DateTimeLocal, label = T, abbr = F)) %>%
+  filter(!is.na(DateTimeLocal))
+```
+
+## Descriptives
+
+Onderstaande functies geven inzicht in de routines van devices. Hiermee kan worden bekeken welk beeld ontstaat per device en hoe daaruit kan blijken of dat bijvoorbeeld een bewoner is of een bezoeker.
+
+
+```{r}
+# View dataframe of logs per device
+view_device <- function(device){
+  
+  require(dplyr)
+  
+  loc %>%
+    filter(code_address == device) %>%
+    mutate(weekdag = wday(DateTimeLocal, label = T, abbr = F)) %>%
+    arrange(DateTimeLocal) %>%
+    View
+}
+
+# View device routines as tileplots per device aggregated over all sensors
+view_routines_aggregated <- function(device){
+  require(dplyr)
+  require(ggplot2)
+  
+  loc %>%
+    filter(code_address == device) %>%
+    mutate(weekdag = wday(DateTimeLocal, label = T, abbr = F)) %>%
+    count(weekdag, uur) %>%
+    ggplot(aes(weekdag, uur, fill = n)) +
+    geom_tile() +
+    scale_fill_gradient2(high="darkgreen", guide="colorbar") +
+    ggtitle('Device Routines', subtitle = paste('code_address: ', device))
+}
+
+# view device routines as tileplots per device per sensor
+view_routines <- function(device){
+  require(dplyr)
+  require(ggplot2)
+  
+  loc %>%
+    filter(code_address == device) %>%
+    mutate(weekdag = wday(DateTimeLocal, label = T, abbr = F)) %>%
+    count(VirtualSensorCode, weekdag, uur) %>%
+    ggplot(aes(weekdag, uur, fill = n)) +
+    geom_tile() +
+    scale_fill_gradient2(high="darkgreen", guide="colorbar") +
+    ggtitle('Device Routines', subtitle = paste('code_address: ', device)) +
+    facet_wrap(~VirtualSensorCode, ncol = 2) +
+    theme(axis.text.x = element_text(angle = 90, hjust = 1))
+}
+```
+
+Devices die regelmatig een meetstation passeren zouden kunnen horen bij bewoners of mensen die werken in Leeuwarden. Het is daarom interessant om na te gaan welke devices het vaakste gelogd zijn.
+
+```{r}
+# hits per device per measuring point
+n_hits_device <- loc %>%
+  count(code_address)
+
+# top most active devices
+n_hits_device %>% 
+  arrange(desc(n)) %>%
+  head(10) %>%
+  kable()
+```
+
+Het bekijken van de routines van deze devices kan inzicht geven in wat een eventule bewoner kan zijn. Een voorbeeld is `985594`. Mogelijk woont de eigenaar in de buurt van meetpunt `1636`
+
+```{r}
+# example: 985594 looks like device belongs to person living near 1636
+view_routines(985594)
+```
+
+```{r}
+# example: 985594 looks like device belongs to person living near 1636
+view_routines_aggregated(985594)
+```
+
+Nog een voorbeeld:
+
+```{r}
+# 1370351: looks like device is away on weekdays except for monday and friday afternoon
+# also some routines visible wednesday
+view_routines_aggregated(1370351)
+```
+
+Dit in tegenstelling tot een mogelijk incidentele bezoeker.
+
+```{r}
+view_routines(1625490)
+```
+
+
+Devices die bijna elke weekdag 's ochtends geregistreerd worden kunnen duiden op woonwerk bewegingen. De verdeling van devices met een hoge activiteit tussen 7 en 9 's ochtends is als volgt:
+
+```{r}
+# check for devices which have high activity between 7 and 9 a.m.
+loc %>%
+  filter(uur == 7 | uur == 8) %>%
+  count(VirtualSensorCode, code_address) %>%
+  arrange(desc(n)) %>%
+  mutate(index = seq_along(n)) %>%
+  select(index, n) %>%
+  slice(1:1000) %>%
+  ggplot(aes(index, n)) +
+  geom_line() +
+  ggtitle('Activity devices between 7 and 9 a.m.')
+```
+
+Van devices die hierop hoger scoren dan n = 500 is een export gemaakt van routines voor nadere (descriptieve) analyse.
+
+```{r, eval =FALSE}
+# cutoff at 500: possible residents for activity number of hits between 7 and 9 a.m. higher than 500
+resident <-   loc %>%
+  filter(uur == 7 | uur == 8) %>%
+  count(VirtualSensorCode, code_address) %>%
+  arrange(desc(n)) %>%
+  filter(n > 500) %>%
+  distinct(code_address)
+
+# exporting routines for possible residents aggregated (all sensors)
+lapply(resident$code_address, function(x) view_routines_aggregated(x) %>%
+         ggsave(filename = paste0('~/OpenData/leeuwarden_data/Routines/Aggregated/', 
+                                  'routines_', x, 
+                                  '.jpg'), device = 'jpg'))
+
+# exporting routines for possible residents (per sensor)
+lapply(resident$code_address, function(x) view_routines(x) %>%
+         ggsave(filename = paste0('~/OpenData/leeuwarden_data/Routines/Per sensor/', 
+                                  'routines_', x, 
+                                  '.jpg'), device = 'jpg'))
+
+```
+
+## Eerste aanzet tot clusteranalyse
+
+Door features per devices uit de data te halen, kan met behulp van een clusteranalyse een indeling gemaakt worden in type passant. Hierbij kan bijvoorbeeld gedacht worden aan bewoners die op doordeweekse ochtenden een hogere activiteit laten zien en bezoekers die mogelijk meer meetpunten passeren dan bewoners (die vooral hoog scoren op één meetpunt).
+
+Het blijkt dat veel devices voornamelijk gemeten worden door één punt:
+
+```{r}
+# meetpuntverdeling devices in de zin van spreiding.
+n_per_device <- loc %>%
+  distinct(code_address, VirtualSensorCode) %>%
+  count(code_address, VirtualSensorCode) %>%
+  group_by(code_address) %>%
+  summarise(n_sensor = sum(n))
+
+# verdeling aantallen meetpunten voor devices
+n_per_device %>%
+  ggplot(aes(n_sensor)) +
+  geom_bar() +
+  scale_x_discrete(limits = 1:10)
+```
+
+Het berekenen van score op de ochtendspits:
+
+```{r}
+# score op ochtendspits
+spits <- loc %>%
+  filter(uur == 7 | uur == 8) %>%
+  count(code_address) %>%
+  arrange(desc(n)) 
+```
+
+Nagaan of men ook in de regen blijft rondlopen. Waarbij regen een aanname is omdat het niet zeker is of het ook in de binnenstad heeft geregend op dat moment.
+
+```{r, eval = F}
+# door weer en wind aanwezig?
+regen_uur <- knmi %>%
+  mutate(uur_dttm = floor_date(tijd, 'hour'),
+         uur = hour(tijd)) %>% 
+  filter(uur > 8, uur < 17) %>%
+  select(uur_dttm, neerslag)
+
+regen_uur_score <- loc %>%
+  mutate(uur_dttm = floor_date(DateTimeLocal, 'hour')) %>%
+  count(uur_dttm, code_address) 
+  left_join(regen_uur)
+```
+
+# Clusteren op 2 groepen
+
+```{r}
+# create set for clustering
+device_clustering <- loc %>%
+  distinct(code_address) %>%
+  left_join(n_per_device) %>%
+  left_join(spits) %>%
+  rename(spits_score = n) %>%
+  mutate(spits_score = ifelse(is.na(spits_score), 0, spits_score)) 
+
+dev_clusters <- device_clustering %>%
+  select(n_sensor, spits_score) %>%
+  kmeans(., 2) %>%
+  .$cluster
+
+res_cluster <- cbind(device_clustering, dev_clusters) %>% as_tibble()
+
+res_cluster %>%
+  ggplot(aes(n_sensor, spits_score, color = as.factor(dev_clusters))) +
+  geom_point()
+
+```
+
+Resultaten bekijken door random routineplots te genereren uit één van de groepen.
+
+```{r}
+# random testen: cluster 2 heeft meer routines. Lijkt erop dat 1 incidenteler spul is
+view_routines(sample(res_cluster[res_cluster$dev_clusters == 2,]$code_address, 1))
+```
+
+```{r}
+view_routines(sample(res_cluster[res_cluster$dev_clusters == 1,]$code_address, 1))
+```
+
+
+Voortschrijdend inzicht obv bovenstaande bevindingen leert dat er mogelijk 3 groepen zijn: residentieel (bewoners/werkenden), vaste bezoekers en incidentele bezoekers. Dus clusteren op 3 groepen zou dit onderscheid moeten kunnen geven.
+
+```{r}
+dev_clusters3 <- device_clustering %>%
+  select(n_sensor, spits_score) %>%
+  kmeans(., 3) %>%
+  .$cluster
+
+res_clusters3 <- cbind(device_clustering, dev_clusters3) %>% as_tibble()
+
+kable(table(res_clusters3$dev_clusters3))
+```
+Weer wat random tests, waarbij de clusters resp regelmatig, residentieel/werkend en incidenteel zou moeten zijn.
+
+Cluster 1
+
+```{r}
+view_routines(sample(res_clusters3[res_clusters3$dev_clusters3 == 1,]$code_address, 1))
+```
+
+Cluster 2
+
+```{r}
+view_routines(sample(res_clusters3[res_clusters3$dev_clusters3 == 2,]$code_address, 1))
+```
+
+Cluster 3
+
+```{r}
+view_routines(sample(res_clusters3[res_clusters3$dev_clusters3 == 3,]$code_address, 1))
+```
+
+## Conclusie
+Het zou een manier kunnen zijn om onderscheid te maken tussen 3 groepen passanten. Het weer zit er nu nog niet in (bedankt `lubridate`). Meer features zouden deze manier robuuster kunnen maken.
+
+
