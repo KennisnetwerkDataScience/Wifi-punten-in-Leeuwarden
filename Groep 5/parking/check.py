@@ -17,6 +17,8 @@ def transform_dt(df):
     df['duration'] = df['end'] - df['start']
 
 def check_entries(df):
+    print('%d entries' % df.shape[0])
+
     has_null = df[pd.isnull(df[['start_parking_dt','end_parking_dt']]).any(axis=1)]
     print('%d with a null in a start / end column' % has_null.shape[0])
 
