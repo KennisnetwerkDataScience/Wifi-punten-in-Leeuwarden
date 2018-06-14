@@ -32,8 +32,8 @@ Ondanks dat er is aangenomen dat de parkeergarages leeg zijn bij het begin van d
 ![gemiddelde bezetting garage 40]("Groep 5/results/parking_zone_40_heatmap_week_hour.png")
 
 ### Volle garages per jaarweek per daguur
-![volle garage 36]("Groep 5/results/parking_garage_36_heatmap_yearweek_dayhour.png")
-![volle garage 37]("Groep 5/results/parking_garage_37_heatmap_yearweek_dayhour.png")
-![volle garage 38]("Groep 5/results/parking_garage_38_heatmap_yearweek_dayhour.png")
-![volle garage 39]("Groep 5/results/parking_garage_39_heatmap_yearweek_dayhour.png")
-![volle garage 40]("Groep 5/results/parking_garage_40_heatmap_yearweek_dayhour.png")
+![volle garage 36]("groep5/results/parking_garage_36_heatmap_yearweek_dayhour.png")
+![volle garage 37]("groep5/results/parking_garage_37_heatmap_yearweek_dayhour.png")
+![volle garage 38]("groep5/results/parking_garage_38_heatmap_yearweek_dayhour.png")
+![volle garage 39]("groep5/results/parking_garage_39_heatmap_yearweek_dayhour.png")
+![volle garage 40]("groep5/results/parking_garage_40_heatmap_yearweek_dayhour.png")
