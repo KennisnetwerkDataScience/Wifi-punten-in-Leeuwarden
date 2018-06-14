@@ -56,11 +56,12 @@ def plot_device_heatmap(sel):
 def save_device_heatmap(addr):
     plot_device_heatmap(freq_week_hour_full(device_df(addr)))
     plt.savefig('results/freq_week_hour_%s.png' % addr)
+    plt.close()
 
 if __name__ == '__main__':
     df = load_data()
     df = df.loc[(df.DateTimeLocal > '2017-01-01') & (df.DateTimeLocal < '2018-01-01')]
-    addresses = df.code_address.unique()[0:1000]
+    addresses = df.code_address.unique()[1000:]
     df_res = pd.DataFrame(columns=['count', 'std_weekday', 'std_hour'])
     for addr in addresses:
         d_df = device_df(addr)
