@@ -3,8 +3,8 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 
-from util import load_data
-from util import *
+from locatus.util import load_data
+from locatus.util import *
 
 def device_df(addr):
     return df.loc[df.code_address == addr]

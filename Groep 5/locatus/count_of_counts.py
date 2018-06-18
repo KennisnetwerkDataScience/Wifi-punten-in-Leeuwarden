@@ -1,6 +1,6 @@
 import matplotlib.pyplot as plt
 
-from util import *
+from locatus.util import *
 
 
 def count_of_counts(df):
