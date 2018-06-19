@@ -2,32 +2,22 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
+from matplotlib.ticker import FuncFormatter, MaxNLocator, MultipleLocator
 
 from parking.util import load_garage_transactions
 from parking.util import load_garages
-from parking.util import timeseries_garages as timeseries
+from parking.util import timeseries_garages
 from parking.util import fix_start_assume_first
 from parking.util import fix_end_by_timedelta
 from parking.util import mark_periods
+from parking.util import dayhours
+from parking.util import yearweeks
+from parking.util import *
 
-def dayhours():
-    ret = []
-    for d in range(7):
-        for h in range(24):
-            ret.append('%s-%s' % (d, h))
-    return ret
-
-def yearweeks(start, end):
-    ret = []
-    t = start
-    while t < end:
-        ret.append(t.strftime('%Y-%W'))
-        t += dt.timedelta(weeks=1)
-    return ret
 
 def yearweek_dayhour_full(ts):
-    ts['yearweek'] = ts['dt'].apply(lambda x: x.strftime('%Y-%V'))
-    ts['dayhour'] = ts['dt'].apply(lambda x: x.strftime('%w-%H'))
+    tag(ts, 'dt', 'yearweek', year_week)
+    tag(ts, 'dt', 'dayhour', weekday_hour)
     df = ts.groupby(['yearweek','dayhour'])['full'].any()
     f = df.unstack(1).fillna(False)
     f = f.astype(int)
@@ -38,14 +28,57 @@ def yearweek_dayhour_full(ts):
     d = d.astype(int)
     return d
 
+def yearweek_dayhour_max(ts):
+    tag(ts, 'dt', 'yearweek', year_week)
+    tag(ts, 'dt', 'dayhour', weekday_hour)
+    df = ts.groupby(['yearweek','dayhour'])['sum'].max()
+    f = df.unstack(1).fillna(False)
+    start = ts['dt'].min()
+    end = ts['dt'].max()
+    d = pd.DataFrame(0, index=yearweeks(start,end), columns=dayhours())
+    print(f)
+    d.update(f)
+    d = d.astype(int)
+    print(d)
+    return d
+
+weekday_labels = ['ma','di','wo','do','vr','za','zo']
+
+def weekday_formatter(val, pos):
+    if val % 24 == 0:
+        return weekday_labels[int((val / 24) % 7)]
+    return ''
+
+def yearweek_formatter(df, d):
+    labels = df.index
+    def f(val, pos):
+        print('%s %s' % (val, pos))
+        if val % d == 0 and val < len(labels):
+            return labels[int(val)]
+        return ''
+    return f
+
 def plot_heatmap(sel):
+    fig = plt.figure()
+    ax = fig.add_subplot(111)
+    xs = range(sel.shape[1])
+    ys = range(sel.shape[0])
+
+    ax.xaxis.set_major_formatter(FuncFormatter(weekday_formatter))
+    ax.xaxis.set_major_locator(MultipleLocator(24))
+
+    ax.yaxis.set_major_formatter(FuncFormatter(yearweek_formatter(sel, 13)))
+    ax.yaxis.set_major_locator(MultipleLocator(13))
+
     plt.pcolor(sel)
     #plt.yticks(np.arange(sel.shape[0]))
-    plt.xticks(np.arange(sel.shape[1], step=24))
+    #plt.xticks(np.arange(sel.shape[1], step=24))
 
 def save_heatmap(ts, garage_id):
     plot_heatmap(yearweek_dayhour_full(select_garage(ts, garage_id)))
-    plt.savefig('results/parking_garage_%s_heatmap_yearweek_dayhour.png' % garage_id)
+    plt.savefig('results/parking_garage_%s_heatmap_yearweek_dayhour_full.png' % garage_id)
+    plot_heatmap(yearweek_dayhour_max(select_garage(ts, garage_id)))
+    plt.savefig('results/parking_garage_%s_heatmap_yearweek_dayhour_max.png' % garage_id)
 
 def select_garage(ts, garage_id):
     return ts[(ts['garage_id'] == garage_id)]
@@ -74,7 +107,7 @@ if __name__ == '__main__':
 
     #df['duration'] = df['end'] - df['start']
 
-    ts = timeseries(df)
+    ts = timeseries_garages(df)
 
     mark_full(ts, garages)
     mark_changed(ts)
@@ -82,5 +115,5 @@ if __name__ == '__main__':
     for i,v in garages.iterrows():
         print(i)
         print(v)
-        print(changes_status(ts, i))
+        #print(changes_status(ts, i))
         save_heatmap(ts, i)

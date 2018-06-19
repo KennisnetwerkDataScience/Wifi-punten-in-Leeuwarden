@@ -10,12 +10,24 @@ from parking.util import fix_start_assume_first
 from parking.util import fix_end_by_timedelta
 from parking.util import mark_periods
 from parking.util import timeseries
+from parking.util import dayhours
+from parking.util import yearweeks
+from parking.util import *
 
 
 def weekday_hour_max(ts):
-    ts['weekday'] = ts['dt'].apply(lambda x: x.weekday())
-    ts['hour'] = ts['dt'].apply(lambda x: x.hour)
+    tag(ts, 'dt', 'weekday', weekday)
+    tag(ts, 'dt', 'hour', hour)
     df = ts.groupby(['weekday','hour'])['sum'].mean()
+    f = df.unstack(1).fillna(0)
+    d = pd.DataFrame(0., index=np.arange(7), columns=np.arange(24))
+    d.update(f)
+    return d
+
+def yearweek_dayhour_max(ts):
+    tag(ts, 'dt', 'yearweek', year_week)
+    tag(ts, 'dt', 'dayhour', weekday_hour)
+    df = ts.groupby(['yearweek','dayhour'])['sum'].mean()
     f = df.unstack(1).fillna(0)
     d = pd.DataFrame(0., index=np.arange(7), columns=np.arange(24))
     d.update(f)

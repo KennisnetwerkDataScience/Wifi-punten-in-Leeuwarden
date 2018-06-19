@@ -5,6 +5,46 @@ import msgpack
 from pathlib import Path
 import time
 
+
+def weekdays():
+    return ['%1d' % d for d in range(1,8)]
+
+def hours():
+    return ['%02d' % d for d in range(24)]
+
+def week(x):
+    return '%2d' % x.isocalendar()[1]
+
+def weekday(x):
+    return '%2d' % x.isocalendar()[2]
+
+def hour(x):
+    return '%02d' % x.hour
+
+def year_week(x):
+    return '%04d-%02d' % (x.isocalendar()[0], x.isocalendar()[1])
+
+def weekday_hour(x):
+    return '%1d-%02d' % (x.isocalendar()[2], x.hour)
+
+def tag(df, f, t, fun):
+    df[t] = df[f].apply(lambda x: fun(x))
+
+def dayhours():
+    ret = []
+    for d in range(1,8):
+        for h in range(24):
+            ret.append('%1d-%02d' % (d, h))
+    return ret
+
+def yearweeks(start, end):
+    ret = []
+    t = start
+    while t < end:
+        ret.append(year_week(t))
+        t += dt.timedelta(weeks=1)
+    return ret
+
 def load_garage_transactions():
     start = time.process_time()
     csv_file_name = '../data/parkeerdata/leeuwarden_garage_parking_transactions.csv'
