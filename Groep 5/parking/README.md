@@ -24,23 +24,23 @@ Door de hyaten in de dataset is het lastig conclussies te trekken uit de data, h
 ## Resultaten
 Ondanks dat er is aangenomen dat de parkeergarages leeg zijn bij het begin van de meting en dat items met een missende eindtijd een duur hebben van 0 seconden hebben 4 van de 5 garages een maximaal aantal auto's bevat die hoger is dan de capaciteit. Het kan natuurlijk zo zijn dat er meer auto's worden toegelaten dan de capaciteit. Op basis van de uitstroom en de gemiddelde tijd die iemand nodig heeft om de garage uit te rijden kan worden berekend hoeveel plekken er ongeveer vrij zijn ondanks dat de capaciteit is bereikt.
 
-### Gemiddelde bezetting garages per weekdag per uur
+### Garage 36
 ![gemiddelde bezetting garage 36](../results/parking_zone_36_heatmap_week_hour.png)
-![gemiddelde bezetting garage 37](../results/parking_zone_37_heatmap_week_hour.png)
-![gemiddelde bezetting garage 38](../results/parking_zone_38_heatmap_week_hour.png)
-![gemiddelde bezetting garage 39](../results/parking_zone_39_heatmap_week_hour.png)
-![gemiddelde bezetting garage 40](../results/parking_zone_40_heatmap_week_hour.png)
-
-### heatmaps garages per jaarweek per daguur
 ![bezetting garage 36](../results/parking_garage_36_heatmap_yearweek_dayhour_max.png)
-![bezetting garage 37](../results/parking_garage_37_heatmap_yearweek_dayhour_max.png)
-![bezetting garage 38](../results/parking_garage_38_heatmap_yearweek_dayhour_max.png)
-![bezetting garage 39](../results/parking_garage_39_heatmap_yearweek_dayhour_max.png)
-![bezetting garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_max.png)
-
-### Volle garages per jaarweek per daguur
 ![volle garage 36](../results/parking_garage_36_heatmap_yearweek_dayhour_full.png)
+### Garage 37
+![gemiddelde bezetting garage 37](../results/parking_zone_37_heatmap_week_hour.png)
+![bezetting garage 37](../results/parking_garage_37_heatmap_yearweek_dayhour_max.png)
 ![volle garage 37](../results/parking_garage_37_heatmap_yearweek_dayhour_full.png)
+### Garage 38
+![gemiddelde bezetting garage 38](../results/parking_zone_38_heatmap_week_hour.png)
+![bezetting garage 38](../results/parking_garage_38_heatmap_yearweek_dayhour_max.png)
 ![volle garage 38](../results/parking_garage_38_heatmap_yearweek_dayhour_full.png)
+### Garage 39
+![gemiddelde bezetting garage 39](../results/parking_zone_39_heatmap_week_hour.png)
+![bezetting garage 39](../results/parking_garage_39_heatmap_yearweek_dayhour_max.png)
 ![volle garage 39](../results/parking_garage_39_heatmap_yearweek_dayhour_full.png)
+### Garage 40
+![gemiddelde bezetting garage 40](../results/parking_zone_40_heatmap_week_hour.png)
+![bezetting garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_max.png)
 ![volle garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_full.png)
