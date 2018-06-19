@@ -42,30 +42,22 @@ def yearweek_dayhour_max(ts):
     print(d)
     return d
 
-weekday_labels = ['ma','di','wo','do','vr','za','zo']
-
-def weekday_formatter(val, pos):
-    if val % 24 == 0:
-        return weekday_labels[int((val / 24) % 7)]
-    return ''
-
-def yearweek_formatter(df, d):
-    labels = df.index
-    def f(val, pos):
-        print('%s %s' % (val, pos))
-        if val % d == 0 and val < len(labels):
-            return labels[int(val)]
-        return ''
-    return f
-
 def plot_heatmap(sel):
     fig = plt.figure()
     ax = fig.add_subplot(111)
     xs = range(sel.shape[1])
     ys = range(sel.shape[0])
 
-    ax.xaxis.set_major_formatter(FuncFormatter(weekday_formatter))
+    ax.xaxis.set_major_formatter(ticker.NullFormatter())
     ax.xaxis.set_major_locator(MultipleLocator(24))
+
+    ax.yaxis.set_minor_formatter(FuncFormatter(weekday_hour_formatter))
+    ax.yaxis.set_minor_locator(ticker.IndexLocator(base=24, offset=12))
+
+    for tick in ax.yaxis.get_minor_ticks():
+        tick.tick1line.set_markersize(0)
+        tick.tick2line.set_markersize(0)
+        tick.label1.set_horizontalalignment('center')
 
     ax.yaxis.set_major_formatter(FuncFormatter(yearweek_formatter(sel, 13)))
     ax.yaxis.set_major_locator(MultipleLocator(13))
@@ -77,8 +69,11 @@ def plot_heatmap(sel):
 def save_heatmap(ts, garage_id):
     plot_heatmap(yearweek_dayhour_full(select_garage(ts, garage_id)))
     plt.savefig('results/parking_garage_%s_heatmap_yearweek_dayhour_full.png' % garage_id)
+    plt.close()
+
     plot_heatmap(yearweek_dayhour_max(select_garage(ts, garage_id)))
     plt.savefig('results/parking_garage_%s_heatmap_yearweek_dayhour_max.png' % garage_id)
+    plt.close()
 
 def select_garage(ts, garage_id):
     return ts[(ts['garage_id'] == garage_id)]

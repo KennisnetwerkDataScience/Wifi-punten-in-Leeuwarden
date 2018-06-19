@@ -5,6 +5,24 @@ import msgpack
 from pathlib import Path
 import time
 
+weekday_labels = ['ma','di','wo','do','vr','za','zo']
+
+def weekday_hour_formatter(val, pos):
+    if val % 24 == 0:
+        return weekday_labels[int(val / 24) % 7]
+    return ''
+
+def weekday_formatter(val, pos):
+    return weekday_labels[int(val) % 7]
+
+def yearweek_formatter(df, d):
+    labels = df.index
+    def f(val, pos):
+        print('%s %s' % (val, pos))
+        if val % d == 0 and val < len(labels):
+            return labels[int(val)]
+        return ''
+    return f
 
 def weekdays():
     return ['%1d' % d for d in range(1,8)]
@@ -16,7 +34,7 @@ def week(x):
     return '%2d' % x.isocalendar()[1]
 
 def weekday(x):
-    return '%2d' % x.isocalendar()[2]
+    return '%1d' % x.isocalendar()[2]
 
 def hour(x):
     return '%02d' % x.hour
