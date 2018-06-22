@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 import datetime as dt
 import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
 from matplotlib.ticker import FuncFormatter, MaxNLocator, MultipleLocator
 
 from parking.util import load_garage_transactions
@@ -18,13 +19,22 @@ from parking.util import *
 def yearweek_dayhour_full(ts):
     tag(ts, 'dt', 'yearweek', year_week)
     tag(ts, 'dt', 'dayhour', weekday_hour)
-    df = ts.groupby(['yearweek','dayhour'])['full'].any()
-    f = df.unstack(1).fillna(False)
-    f = f.astype(int)
     start = ts['dt'].min()
     end = ts['dt'].max()
     d = pd.DataFrame(0, index=yearweeks(start,end), columns=dayhours())
+
+    df = ts.groupby(['yearweek','dayhour'])['90%'].any()
+    f = df.unstack(1).fillna(False)
+    f[f == True] = 1
+    f[f == False] = np.nan
     d.update(f)
+
+    df = ts.groupby(['yearweek','dayhour'])['full'].any()
+    f = df.unstack(1).fillna(False)
+    f[f == True] = 2
+    f[f == False] = np.nan
+    d.update(f)
+
     d = d.astype(int)
     return d
 
@@ -36,7 +46,6 @@ def yearweek_dayhour_max(ts):
     start = ts['dt'].min()
     end = ts['dt'].max()
     d = pd.DataFrame(0, index=yearweeks(start,end), columns=dayhours())
-    print(f)
     d.update(f)
     d = d.astype(int)
     print(d)
@@ -45,24 +54,25 @@ def yearweek_dayhour_max(ts):
 def plot_heatmap(sel):
     fig = plt.figure()
     ax = fig.add_subplot(111)
+    plt.pcolor(sel)
+
     xs = range(sel.shape[1])
     ys = range(sel.shape[0])
 
     ax.xaxis.set_major_formatter(ticker.NullFormatter())
-    ax.xaxis.set_major_locator(MultipleLocator(24))
+    ax.xaxis.set_major_locator(ticker.IndexLocator(base=24, offset=0))
 
-    ax.yaxis.set_minor_formatter(FuncFormatter(weekday_hour_formatter))
-    ax.yaxis.set_minor_locator(ticker.IndexLocator(base=24, offset=12))
+    ax.xaxis.set_minor_formatter(FuncFormatter(weekday_hour_formatter))
+    ax.xaxis.set_minor_locator(ticker.IndexLocator(base=24, offset=12))
 
-    for tick in ax.yaxis.get_minor_ticks():
+    for tick in ax.xaxis.get_minor_ticks():
         tick.tick1line.set_markersize(0)
         tick.tick2line.set_markersize(0)
-        tick.label1.set_horizontalalignment('center')
+        tick.label1.set_verticalalignment('center')
 
     ax.yaxis.set_major_formatter(FuncFormatter(yearweek_formatter(sel, 13)))
     ax.yaxis.set_major_locator(MultipleLocator(13))
 
-    plt.pcolor(sel)
     #plt.yticks(np.arange(sel.shape[0]))
     #plt.xticks(np.arange(sel.shape[1], step=24))
 
@@ -81,6 +91,10 @@ def select_garage(ts, garage_id):
 def mark_full(ts, garages):
     ts['capacity'] = ts['garage_id'].map(garages['capacity_value'])
     ts['full'] = ts['sum'] >= ts['capacity']
+
+def mark_90(ts, garages):
+    ts['capacity'] = ts['garage_id'].map(garages['capacity_value'])
+    ts['90%'] = ts['sum'] >= ts['capacity'] * .9
 
 def mark_changed(ts):
     g = ts.groupby('garage_id')['full']
@@ -105,6 +119,7 @@ if __name__ == '__main__':
     ts = timeseries_garages(df)
 
     mark_full(ts, garages)
+    mark_90(ts, garages)
     mark_changed(ts)
     #mark_periods(ts)
     for i,v in garages.iterrows():

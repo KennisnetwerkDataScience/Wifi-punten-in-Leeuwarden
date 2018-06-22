@@ -8,9 +8,9 @@ import time
 weekday_labels = ['ma','di','wo','do','vr','za','zo']
 
 def weekday_hour_formatter(val, pos):
-    if val % 24 == 0:
-        return weekday_labels[int(val / 24) % 7]
-    return ''
+    #if val % 24 == 0:
+    return weekday_labels[int(val / 24) % 7]
+    #return ''
 
 def weekday_formatter(val, pos):
     return weekday_labels[int(val) % 7]
