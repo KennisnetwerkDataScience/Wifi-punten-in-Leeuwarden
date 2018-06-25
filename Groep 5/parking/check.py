@@ -22,17 +22,46 @@ def check_entries(df):
     has_null = df[pd.isnull(df[['start_parking_dt','end_parking_dt']]).any(axis=1)]
     print('%d with a null in a start / end column' % has_null.shape[0])
 
-    has_null = df['start_parking_dt'].isnull().sum()
-    print('%d with a null in the start column' % has_null)
+    count = df['start_parking_dt'].isnull().sum()
+    print('%d with a null in the start column' % count)
 
-    has_null = df['end_parking_dt'].isnull().sum()
-    print('%d with a null in the end column' % has_null)
+    count = df['end_parking_dt'].isnull().sum()
+    print('%d with a null in the end column' % count)
+
+    count = df['pay_parking_dt'].isnull().sum()
+    print('%d with a null in the paid column' % count)
+
+    count = ((df['pay_parking_dt'].isnull()) & (df['card_type_id'] == 221)).sum()
+    print('%d with a null in the paid column and subscription' % count)
+
+    sel = (~df['pay_parking_dt'].isnull()) & (df['card_type_id'] == 221)
+    rows = df[sel]
+    count = sel.sum()
+    print('%d with a timestamp in the paid column and subscription' % count)
+    with pd.option_context('display.max_columns', 10, 'display.width', 1000):
+        print(rows[['transaction_id', 'garage_id', 'start_parking_dt', 'end_parking_dt', 'pay_parking_dt', 'duration', 'card_type_id']])
+
+    sel = (df['pay_parking_dt'].isnull()) & (df['card_type_id'] == 220)
+    rows = df[sel]
+    count = sel.sum()
+    print('%d with a null in the paid column and short parking' % count)
+    with pd.option_context('display.max_columns', 10, 'display.width', 1000):
+        print(rows[['transaction_id', 'garage_id', 'start_parking_dt', 'end_parking_dt', 'pay_parking_dt', 'duration', 'card_type_id']])
 
     rows = df[df['duration'] < dt.timedelta(0)]
     print('%d with a negative duration' % rows.shape[0])
+    count = rows['pay_parking_dt'].isnull().sum()
+    print('%d with a negative duration unpaid' % count)
+    with pd.option_context('display.max_columns', 10, 'display.width', 1000):
+        print(rows[['transaction_id', 'garage_id', 'start_parking_dt', 'end_parking_dt', 'pay_parking_dt', 'duration', 'card_type_id']])
 
     rows = df[df['duration'] == dt.timedelta(0)]
     print('%d with a 0 duration' % rows.shape[0])
+    count = rows['pay_parking_dt'].isnull().sum()
+    print('%d with a 0 duration unpaid' % count)
+    with pd.option_context('display.max_columns', 10, 'display.width', 1000):
+        print(rows[['transaction_id', 'garage_id', 'start_parking_dt', 'end_parking_dt', 'pay_parking_dt', 'duration', 'card_type_id']])
+
 
     duration = df['duration']
     max_duration = duration[pd.isnull(duration) == False].sort_values().max()
