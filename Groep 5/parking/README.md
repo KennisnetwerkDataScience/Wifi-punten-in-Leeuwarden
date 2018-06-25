@@ -198,3 +198,14 @@ Ondanks dat er is aangenomen dat de parkeergarages leeg zijn bij het begin van d
 ![gemiddelde bezetting garage 40](../results/parking_zone_40_heatmap_week_hour.png)
 ![bezetting garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_max.png)
 ![volle garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_full.png)
+
+### Minimale en maximale bezetting
+![minimale bezetting garages](../results/parking_garages_min.png)
+![maximale bezetting garages](../results/parking_garages_max.png)
+
+### Verschillen
+In de parkeergarages zijn twee duidelijke verschillen waar te nemen. Er zijn parkeergarages die hoofdzakelijk doordeweeks worden gebruikt en parkeergarages die
+met name op zaterdag piek momenten hebben.
+- Bezoekers garages: 36, 39
+- Doordeweekse garages: 38, 40
+- Garage 37 heeft piekmomenten op donderdagmiddag en op zaterdag en verder een behoorlijke bezetting doordeweeks.
