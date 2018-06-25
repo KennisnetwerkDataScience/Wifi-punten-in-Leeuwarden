@@ -19,7 +19,7 @@ De maximale parkeerduur is 120 dagen, die voor kort parkeren 108 dagen.
 ### Geen betaaltijd
 Abonnement houders hoeven natuurlijk niet te betalen. Een groot deel van de data zonder betaaltijd betreft inderdaad abonement houders.
 Vreemd genoeg is er 10 keer door een abbonementhouder wel betaald bij de automaat.
-'''
+```
          transaction_id  garage_id  start_parking_dt    end_parking_dt    pay_parking_dt duration  card_type_id
 47350            941740         38   15-1-2016 15:34   16-1-2016 13:35   16-1-2016 13:32 22:01:00           221
 352273          3095076         36    4-4-2016 09:06    4-4-2016 21:17    4-4-2016 09:09 12:11:00           221
@@ -31,17 +31,17 @@ Vreemd genoeg is er 10 keer door een abbonementhouder wel betaald bij de automaa
 2360089         1163680         38   10-9-2017 12:23   10-9-2017 17:40   10-9-2017 17:19 05:17:00           221
 2447917         2274941         39   2-10-2017 07:24   2-10-2017 16:00   2-10-2017 07:26 08:36:00           221
 2510639         2291129         39  16-10-2017 07:41  16-10-2017 16:21  16-10-2017 07:44 08:40:00           221
-'''
+```
 
 Uit de csv
-'''
+```
 38;221;941740;"15-1-2016 15:34";"16-1-2016 13:35";"16-1-2016 13:32";588;595;591
 36;221;3095076;"4-4-2016 09:06";"4-4-2016 21:17";"4-4-2016 09:09";989;999;992
 38;221;989991;"17-5-2016 07:04";"17-5-2016 15:30";"17-5-2016 15:30";588;595;591
-'''
+```
 
 Bij kort parkeren zou altijd betaald moeten zijn. Dat is in 199.942 gevallen niet gebeurt volgens de data.
-'''
+```
          garage_id start_parking_dt   end_parking_dt pay_parking_dt duration  card_type_id
 9               36   1-1-2016 00:40              NaN            NaN      NaT           220
 63              36   1-1-2016 06:07   1-1-2016 06:10            NaN 00:03:00           220
@@ -104,7 +104,7 @@ Bij kort parkeren zou altijd betaald moeten zijn. Dat is in 199.942 gevallen nie
 3379989         39  31-3-2018 20:57  31-3-2018 20:59            NaN 00:02:00           220
 3380015         38  31-3-2018 21:09   1-4-2018 01:09            NaN 04:00:00           220
 3380079         36  31-3-2018 22:03              NaN            NaN      NaT           220
-'''
+```
 
 ### Items met een negatieve parkeerduur.
 - Alle binnen 1 uur negatief.
@@ -113,7 +113,7 @@ Bij kort parkeren zou altijd betaald moeten zijn. Dat is in 199.942 gevallen nie
 - Op twee verschillende dagen.
 - 30-10-2016 was het begin van de wintertijd, klok 1 uur terug.
 - Begin zomertijd 2018 was op 25-3-2018, klok 1 uur vooruit.
-'''
+```
          garage_id  start_parking_dt    end_parking_dt          duration
 1110207         36  30-10-2016 02:29  30-10-2016 02:19 -1 days +23:50:00
 2871494         39    3-4-2018 13:56    3-4-2018 13:45 -1 days +23:49:00
@@ -135,14 +135,14 @@ Bij kort parkeren zou altijd betaald moeten zijn. Dat is in 199.942 gevallen nie
 2871720         39    3-4-2018 14:28    3-4-2018 13:41 -1 days +23:13:00
 2871733         39    3-4-2018 14:30    3-4-2018 14:12 -1 days +23:42:00
 2871735         39    3-4-2018 14:30    3-4-2018 13:52 -1 days +23:22:00
-'''
+```
 
 ### Items met een parkeerduur van 0.
 - 269 items in totaal
 - In alle garages
 - Op willekeurige dagen
 - Waarvan sommige een betaal tijdstip hebben.
-'''
+```
          garage_id start_parking_dt   end_parking_dt   pay_parking_dt duration
 20511           39   8-1-2016 21:55   8-1-2016 21:55              NaN   0 days
 53076           39  16-1-2016 18:24  16-1-2016 18:24              NaN   0 days
@@ -165,7 +165,7 @@ Bij kort parkeren zou altijd betaald moeten zijn. Dat is in 199.942 gevallen nie
 3332746         39  22-3-2018 12:46  22-3-2018 12:46              NaN   0 days
 3341571         39  23-3-2018 21:03  23-3-2018 21:03              NaN   0 days
 3376529         39  31-3-2018 12:15  31-3-2018 12:15              NaN   0 days
-'''
+```
 
 ## Analyse
 Door de hyaten in de dataset is het lastig conclussies te trekken uit de data, hiervoor zullen een aantal aannames moeten worden gedaan.
