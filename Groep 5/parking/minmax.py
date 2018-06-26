@@ -59,29 +59,41 @@ if __name__ == '__main__':
 
     colors = ['r','b','g','c','m']
 
+    xlabels = ts['yearweek'].unique()
+
+    legend = []
+    legend.extend(['minimum %s' % i for i in np.arange(36, 41)])
+    legend.extend(['smooth(10) %s' % i for i in np.arange(36, 41)])
+
     fig, ax = plt.subplots(figsize=(20, 10))
-    ax.xaxis.set_major_formatter(FuncFormatter(yearweek_formatter_labels(ts['yearweek'], 13)))
+    ax.xaxis.set_major_formatter(FuncFormatter(yearweek_formatter_labels(xlabels, 13)))
     ax.xaxis.set_major_locator(MultipleLocator(13))
-    min.groupby('garage_id').plot(style='.')
-    plt.plot(min.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
-    ax.legend(loc='upper right')
+    ax.set_color_cycle(colors)
+    ax.plot(min.groupby('garage_id').apply(pd.Series).unstack(0), linestyle='--')
+    ax.plot(min.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
+    ax.legend(legend, loc='upper right')
     plt.savefig('results/parking_garages_min.png')
     #plt.show()
     plt.close()
 
+    legend = []
+    legend.extend(['maximum %s' % i for i in np.arange(36, 41)])
+    legend.extend(['smooth(10) %s' % i for i in np.arange(36, 41)])
+
     fig, ax = plt.subplots(figsize=(20, 10))
-    ax.xaxis.set_major_formatter(FuncFormatter(yearweek_formatter_labels(ts['yearweek'].unique(), 13)))
-    ax.xaxis.set_major_locator(MultipleLocator(13))
-    ax.set_color_cycle(colors)
-    max.groupby('garage_id').plot(style='.')
-    plt.plot(max.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
     i = 0
     for garage_id,v in garages.sort_index().iterrows():
         capacity = garages.loc[[garage_id]]['capacity_value'].iloc[0]
         ax.axhline(y=capacity, color=colors[i])
         i = i + 1
 
-    ax.legend(loc='upper right')
+    ax.xaxis.set_major_formatter(FuncFormatter(yearweek_formatter_labels(xlabels, 13)))
+    ax.xaxis.set_major_locator(MultipleLocator(13))
+    ax.set_color_cycle(colors)
+    ax.plot(max.groupby('garage_id').apply(pd.Series).unstack(0), linestyle='--')
+    ax.plot(max.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
+    ax.legend(legend, loc='upper right')
+
     plt.savefig('results/parking_garages_max.png')
     #plt.show()
     plt.close()

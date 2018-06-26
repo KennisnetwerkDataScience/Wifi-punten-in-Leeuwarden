@@ -7,6 +7,9 @@ import time
 
 weekday_labels = ['ma','di','wo','do','vr','za','zo']
 
+def day(x):
+    return x.date()
+
 def weekday_hour_formatter(val, pos):
     #if val % 24 == 0:
     return weekday_labels[int(val / 24) % 7]
@@ -17,9 +20,19 @@ def weekday_formatter(val, pos):
 
 def yearweek_formatter(df, d):
     labels = df.index
+    print(d)
+    def f(val, pos):
+        if val % d == 0 and val < len(labels):
+            return labels[int(val)]
+        return ''
+    return f
+
+def yearweek_formatter_labels(labels, d):
     def f(val, pos):
         print('%s %s' % (val, pos))
-        if val % d == 0 and val < len(labels):
+        if val % d == 0 and val < len(labels) and val >= 0:
+            print(labels)
+            print('return %s' % labels[int(val)])
             return labels[int(val)]
         return ''
     return f
