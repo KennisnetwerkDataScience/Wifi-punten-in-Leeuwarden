@@ -218,5 +218,8 @@ Normaal gesproken is een garage vol als er zoveel auto's zijn geparkeerd als dat
 
 ### Overloop naar andere garages
 
-![flux bezetting garage 36](../results/parking_garages_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
-![flux bezetting garage 36](../results/parking_garages_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
+![flux bezetting garages](../results/parking_garages_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
+![flux bezetting garages](../results/parking_garages_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
+
+### Overloop naar andere garages
+![flux bezetting garages](../results/parking_garages_2017-08-20%2000:00:00_2017-08-21%2000:00:00.png)
