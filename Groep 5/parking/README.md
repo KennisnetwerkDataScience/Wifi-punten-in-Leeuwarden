@@ -209,3 +209,14 @@ met name op zaterdag piek momenten hebben.
 - Bezoekers garages: 36, 39
 - Doordeweekse garages: 38, 40
 - Garage 37 heeft piekmomenten op donderdagmiddag en op zaterdag en verder een behoorlijke bezetting doordeweeks.
+
+### Flux
+Normaal gesproken is een garage vol als er zoveel auto's zijn geparkeerd als dat de capaciteit toelaat. De maximale bezetting over de jaren heen suggereert dat de data wat dit betreft ook hyaten heeft. Het is onwaarschijnlijk dat de maximale bezetting op de drukke dagen veel varieert en enigzins een verloop kent. Door een analyse uit te voeren van de instroom en uitstroom wordt dit bevestigd. Op vele van de drukke dagen lijkt de capaciteit te zijn bereikt terwijl de bezetting iets onder de capaciteit ligt. Op deze dagen wordt er plots een platau bereikt qua bezetting en is er tevens een plotselinge afname van de toevoer te zien die op dat moment grosso modo gelijk is aan de uitstroom. Dit suggereert dat op die momenten voor elke uitgaande auto een ingaande auto wordt toegelaten en een andere teller aangeeft dat de capaciteit is bereikt.
+
+![flux bezetting garage 36](../results/garage36/parking_garage_36_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
+![flux bezetting garage 36](../results/garage36/parking_garage_36_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
+
+### Overloop naar andere garages
+
+![flux bezetting garage 36](../results/parking_garages_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
+![flux bezetting garage 36](../results/parking_garages_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
