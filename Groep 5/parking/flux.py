@@ -7,6 +7,7 @@ import matplotlib.dates as mdates
 
 from parking.util import *
 
+outdir = 'results/parking/garage/flux'
 
 def flux_sum(ts, sample, window, garage_id, start, end):
     print(garage_id)
@@ -56,12 +57,15 @@ def save_plot(ts, garages, sample, window, garage_id, start, end):
     ax2.axhline(y=capacity, color='r')
     ax2.axhline(y=0, color='r')
     ax2.legend(loc='upper right')
-    plt.savefig('results/parking_garage_%s_%s_%s.png' % (garage_id, start, end))
+    ensure_dir('%s/%s' % (outdir, garage_id))
+    plt.savefig('%s/%s/%s_%s.png' % (outdir, garage_id, start.strftime(dt_format), start.strftime(end)))
     plt.close()
 
 if __name__ == '__main__':
     sample='1T'
     window=10
+
+    ensure_dir(outdir)
 
     garages = load_garages()
 

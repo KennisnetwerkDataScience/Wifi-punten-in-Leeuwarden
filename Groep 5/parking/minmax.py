@@ -72,7 +72,7 @@ if __name__ == '__main__':
     ax.plot(min.groupby('garage_id').apply(pd.Series).unstack(0), linestyle='--')
     ax.plot(min.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
     ax.legend(legend, loc='upper right')
-    plt.savefig('results/parking_garages_min.png')
+    plt.savefig('results/parking/garages/min.png')
     #plt.show()
     plt.close()
 
@@ -94,6 +94,6 @@ if __name__ == '__main__':
     ax.plot(max.groupby('garage_id').apply(smooth(10)).apply(pd.Series).transpose())
     ax.legend(legend, loc='upper right')
 
-    plt.savefig('results/parking_garages_max.png')
+    plt.savefig('results/parking/garages/max.png')
     #plt.show()
     plt.close()

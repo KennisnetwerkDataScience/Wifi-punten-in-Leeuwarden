@@ -4,8 +4,14 @@ import datetime as dt
 import msgpack
 from pathlib import Path
 import time
+import os
 
+dt_format = '%Y-%m-%dT%H-%M-%S'
 weekday_labels = ['ma','di','wo','do','vr','za','zo']
+
+def ensure_dir(outdir):
+    if not os.path.exists(outdir):
+        os.makedirs(outdir)
 
 def day(x):
     return x.date()
@@ -29,10 +35,10 @@ def yearweek_formatter(df, d):
 
 def yearweek_formatter_labels(labels, d):
     def f(val, pos):
-        print('%s %s' % (val, pos))
+        #print('%s %s' % (val, pos))
         if val % d == 0 and val < len(labels) and val >= 0:
-            print(labels)
-            print('return %s' % labels[int(val)])
+            #print(labels)
+            #print('return %s' % labels[int(val)])
             return labels[int(val)]
         return ''
     return f
