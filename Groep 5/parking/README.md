@@ -202,6 +202,8 @@ Ondanks dat er is aangenomen dat de parkeergarages leeg zijn bij het begin van d
 ### Minimale en maximale bezetting
 ![minimale bezetting garages](../results/parking/garages/min.png)
 ![maximale bezetting garages](../results/parking/garages/max.png)
+### De dag dat alle parkeergarages s'nacht leeg waren
+![flux bezetting garages](../results/parking/garages/flux/2017-08-20T00-00-00_2017-08-21T00-00-00.png)
 
 ### Verschillen
 In de parkeergarages zijn twee duidelijke verschillen waar te nemen. Er zijn parkeergarages die hoofdzakelijk doordeweeks worden gebruikt en parkeergarages die
@@ -220,6 +222,3 @@ Normaal gesproken is een garage vol als er zoveel auto's zijn geparkeerd als dat
 
 ![flux bezetting garages](../results/parking/garages/flux/2016-01-02T00-00-00_2016-01-03T00-00-00.png)
 ![flux bezetting garages](../results/parking/garages/flux/2016-01-16T00-00-00_2016-01-17T00-00-00.png)
-
-### Overloop naar andere garages
-![flux bezetting garages](../results/parking/garages/flux/2017-08-20T00-00-00_2017-08-21T00-00-00.png)
