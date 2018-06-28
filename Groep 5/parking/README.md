@@ -200,8 +200,8 @@ Ondanks dat er is aangenomen dat de parkeergarages leeg zijn bij het begin van d
 ![volle garage 40](../results/parking_garage_40_heatmap_yearweek_dayhour_full.png)
 
 ### Minimale en maximale bezetting
-![minimale bezetting garages](../results/parking_garages_min.png)
-![maximale bezetting garages](../results/parking_garages_max.png)
+![minimale bezetting garages](../results/parking/garages/min.png)
+![maximale bezetting garages](../results/parking/garages/max.png)
 
 ### Verschillen
 In de parkeergarages zijn twee duidelijke verschillen waar te nemen. Er zijn parkeergarages die hoofdzakelijk doordeweeks worden gebruikt en parkeergarages die
@@ -213,13 +213,13 @@ met name op zaterdag piek momenten hebben.
 ### Flux
 Normaal gesproken is een garage vol als er zoveel auto's zijn geparkeerd als dat de capaciteit toelaat. De maximale bezetting over de jaren heen suggereert dat de data wat dit betreft ook hyaten heeft. Het is onwaarschijnlijk dat de maximale bezetting op de drukke dagen veel varieert en enigzins een verloop kent. Door een analyse uit te voeren van de instroom en uitstroom wordt dit bevestigd. Op vele van de drukke dagen lijkt de capaciteit te zijn bereikt terwijl de bezetting iets onder de capaciteit ligt. Op deze dagen wordt er plots een platau bereikt qua bezetting en is er tevens een plotselinge afname van de toevoer te zien die op dat moment grosso modo gelijk is aan de uitstroom. Dit suggereert dat op die momenten voor elke uitgaande auto een ingaande auto wordt toegelaten en een andere teller aangeeft dat de capaciteit is bereikt.
 
-![flux bezetting garage 36](../results/garage36/parking_garage_36_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
-![flux bezetting garage 36](../results/garage36/parking_garage_36_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
+![flux bezetting garage 36](../results/parking/garage/flux/36/2016-01-02T00-00-00_2016-01-03T00-00-00.png)
+![flux bezetting garage 36](../results/parking/garage/flux/36/2016-01-16T00-00-00_2016-01-17T00-00-00.png)
 
 ### Overloop naar andere garages
 
-![flux bezetting garages](../results/parking_garages_2016-01-02%2000:00:00_2016-01-03%2000:00:00.png)
-![flux bezetting garages](../results/parking_garages_2016-01-16%2000:00:00_2016-01-17%2000:00:00.png)
+![flux bezetting garages](../results/parking/garages/flux/2016-01-02T00-00-00_2016-01-03T00-00-00.png)
+![flux bezetting garages](../results/parking/garages/flux/2016-01-16T00-00-00_2016-01-17T00-00-00.png)
 
 ### Overloop naar andere garages
-![flux bezetting garages](../results/parking_garages_2017-08-20%2000:00:00_2017-08-21%2000:00:00.png)
+![flux bezetting garages](../results/parking/garages/flux/2017-08-20T00-00-00_2017-08-21T00-00-00.png)
