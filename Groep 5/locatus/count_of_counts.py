@@ -20,7 +20,14 @@ if __name__ == "__main__":
     assert num_sensors(df) == expected_num_sensors
 
     coc = count_of_counts(df)
+    fig = coc.plot(style='.', figsize=(10,10))
+    fig.set_xlabel('count')
+    fig.set_ylabel('times device seen')
+    plt.savefig('results/locatus/count_of_counts.png')
+    plt.close()
+
     fig = coc.plot(style='.', logx=True, logy=True, figsize=(10,10))
     fig.set_xlabel('count')
     fig.set_ylabel('times device seen')
-    plt.savefig('results/count_of_counts.png')
+    plt.savefig('results/locatus/count_of_counts_log.png')
+    plt.close()
