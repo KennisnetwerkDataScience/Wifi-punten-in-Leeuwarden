@@ -166,36 +166,42 @@ Bepaalde patronen zijn voor een mens makkelijk te herkennen in de grafieken. Met
 - holiday 0.009794244
 - incidental 0.00040497325
 - once 4.1682535e-05
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10004.png)
 - incidental 0.9879429
 - holiday 0.006636714
 - once 0.0039529866
 - between 0.0011689693
 - regular 0.00029848912
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10005.png)
 - once 0.93184984
 - incidental 0.06384625
 - between 0.0019799476
 - holiday 0.0019307188
 - regular 0.00039328312
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10009.png)
 - incidental 0.9135688
 - once 0.054632265
 - holiday 0.014076398
 - between 0.014001362
 - regular 0.003721056
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10014.png)
 - regular 0.99423146
 - between 0.0057454375
 - holiday 2.2895143e-05
 - incidental 1.8406993e-07
 - once 1.1046355e-08
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10018.png)
 - holiday 0.44549683
 - regular 0.27471495
 - between 0.27150056
 - incidental 0.007863182
 - once 0.00042449663
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10040.png)
 - holiday 0.811669
 - between 0.080748476
