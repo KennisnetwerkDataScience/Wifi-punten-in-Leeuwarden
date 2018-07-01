@@ -1,6 +1,7 @@
 cycler==0.10.0
 kiwisolver==1.0.1
 matplotlib==2.2.2
+msgpack==0.5.6
 numpy==1.14.3
 pandas==0.23.0
 pyparsing==2.2.0
@@ -10,3 +11,18 @@ scikit-learn==0.19.1
 scipy==1.1.0
 six==1.11.0
 sklearn==0.0
+absl-py==0.2.2
+astor==0.6.2
+bleach==1.5.0
+gast==0.2.0
+grpcio==1.12.1
+html5lib==0.9999999
+Markdown==2.6.11
+numpy==1.14.5
+protobuf==3.6.0
+six==1.11.0
+tensorboard==1.8.0
+tensorflow==1.8.0
+tensorflow-hub==0.1.0
+termcolor==1.1.0
+Werkzeug==0.14.1
