@@ -52,39 +52,71 @@ Het zou kunnen dat er een andere maat is waarbij wel een duidelijke onderscheid 
 
 ### Voorbeelden
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/2.png)
+
 Incidentele bezoeker
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/3.png)
+
 Incidentele bezoeker
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/22.png)
+
 Incidentele bezoeker
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/353.png)
+
 Regelmatige bezoeker
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/362.png)
+
 Regelmatige bezoeker, bewoner?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/608.png)
+
 Regelmatige bezoeker, bewoner?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/686.png)
+
 Regelmatige bezoeker, winkeleigenaar?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/914.png)
+
 Regelmatige bezoeker, postbode?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/832.png)
+
 Vakantiebaan?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/1087.png)
+
 Vakantiebaan?
 
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/914.png)
+
 Vaak op di, wo en vr aanwezig, maar vaak ook niet.
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/25.png)
+
 Verspreid over de week, vaak ook niet. Bewoner / werknemer of bezoeker?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/688.png)
+
 ma, di wo, do. Werknemer of leverancier?
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/688.png)
+
 Iemand die regelmatig uit gaat in het centrum.
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/841.png)
+
 Meestal op wo een uurtje.
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/879.png)
+
 Elke dag van de week, vaak niet.
+
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/00000/936.png)
+
 Elke dag van de week, met name op zaterdag, vaak niet.
 
 ### Mogelijke typeringen van gebruiker
@@ -129,44 +161,44 @@ Bepaalde patronen zijn voor een mens makkelijk te herkennen in de grafieken. Met
 
 ### Voorbeeld uitkomsten
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10003.png)
-regular 0.86244684
-between 0.12731232
-holiday 0.009794244
-incidental 0.00040497325
-once 4.1682535e-05
+- regular 0.86244684
+- between 0.12731232
+- holiday 0.009794244
+- incidental 0.00040497325
+- once 4.1682535e-05
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10004.png)
-incidental 0.9879429
-holiday 0.006636714
-once 0.0039529866
-between 0.0011689693
-regular 0.00029848912
+- incidental 0.9879429
+- holiday 0.006636714
+- once 0.0039529866
+- between 0.0011689693
+- regular 0.00029848912
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10005.png)
-once 0.93184984
-incidental 0.06384625
-between 0.0019799476
-holiday 0.0019307188
-regular 0.00039328312
+- once 0.93184984
+- incidental 0.06384625
+- between 0.0019799476
+- holiday 0.0019307188
+- regular 0.00039328312
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10009.png)
-incidental 0.9135688
-once 0.054632265
-holiday 0.014076398
-between 0.014001362
-regular 0.003721056
+- incidental 0.9135688
+- once 0.054632265
+- holiday 0.014076398
+- between 0.014001362
+- regular 0.003721056
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10014.png)
-regular 0.99423146
-between 0.0057454375
-holiday 2.2895143e-05
-incidental 1.8406993e-07
-once 1.1046355e-08
+- regular 0.99423146
+- between 0.0057454375
+- holiday 2.2895143e-05
+- incidental 1.8406993e-07
+- once 1.1046355e-08
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10018.png)
-holiday 0.44549683
-regular 0.27471495
-between 0.27150056
-incidental 0.007863182
-once 0.00042449663
+- holiday 0.44549683
+- regular 0.27471495
+- between 0.27150056
+- incidental 0.007863182
+- once 0.00042449663
 ![heatmap](../results/locatus/device_heatmap_yearweek_weekdayhour/10000/10040.png)
-holiday 0.811669
-between 0.080748476
-incidental 0.08008464
-once 0.018068189
-regular 0.00942965
+- holiday 0.811669
+- between 0.080748476
+- incidental 0.08008464
+- once 0.018068189
+- regular 0.00942965
