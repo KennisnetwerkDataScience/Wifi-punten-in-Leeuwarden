@@ -1,8 +1,15 @@
 # onderzoeksvragen
 - Onderscheid tussen (recreatieve) bezoekers en andere passanten (werkenden, bewoners): welke terugkeerpatronen zien we die kunnen duiden op bijvoorbeeld mensen die wonen of werken in de Binnenstad?
--
--
--
+- Toon visuele weergave van loopstromen
+- Heatmaps bezoekers
+- Verblijfstijden binnenstad
+- Wat is de actieradius van mensen die bv bij het telpunt Kleine Kerkstraat (=parkeergarage Oldehoofsterkerkhof) de binnenstad in gaan?
+- Hoe verspreiden mensen zich naar de verschillende telpunten nadat ze langs telpunt A zijn gekomen? (bijvoorbeeld van telpunt Prins Hendrikstraat naar de Nieuwestad?, top10 beweegpatronen)
+- Welke mensen bereiken wel/niet de Voorstreek? (Voorstreek is qua detailhandel een moeilijk gebied)
+- Welk invloed heeft neerslag (of andere weersomstandigheden) op beweegpatronen en verblijfsduur in de binnenstad?
+- Welke patronen zijn er in combinatie met parkeertransacties? Wat is het effect van een volle parkeergarage?
+- Keren bezoekers (frequenter) terug na een evenement? (bijv: mensen die 2 maanden voor een evenement niet in de Binnenstad waren, maar wel tijdens De Opening LF2018 (eind januari 2018) en ook in de 2 maanden erna)
+- Effect van gebeurtenissen (expo’s, evenementen bezoek gerelateerd op bezoek elders in de stad, bijvoorbeeld: wat doen bezoekers van Alma Tadema tentoonstelling in het Fries Museum verder nog in de binnenstad?)
 
 # Locatus data
 
@@ -26,8 +33,8 @@ Snelle passages worden niet gemeten. Mobieltjes zoeken eens in de zoveel seconde
 Onderscheid reguliere bezoekers, incidentele bezoekers
 
 ## Aantal detecties
-De onderste punten zijn apparaten die slechts weinig keer zijn gedetecteerd.
-De linker punten zijn apparaten die heel vaak zijn gedetecteerd.
+De linker punten zijn apparaten die slechts weinig keer zijn gedetecteerd.
+De onderste punten zijn apparaten die heel vaak zijn gedetecteerd.
 In de uitlopers is er een onderscheid te maken tussen incidenteel en regulier.
 ![counts](../results/locatus/count_of_counts.png)
 
