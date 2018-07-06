@@ -44,15 +44,15 @@ wifidf.kwrt <- wifidf %>%
 shinyApp(
   ui = fluidPage(
     mainPanel(h3("Hi!"),
-              p("De figuur hier onder geeft aan hoeveel adressen er op een bepaald 
-                kwartier op verchillende plaatsen zijn. Met de slider kan het gewenste 
+              p("De figuur hier onder geeft aan hoeveel devices er gemiddeld genomen op een bepaald 
+                kwartier op verschillende plaatsen zijn. Met de slider kan het gewenste 
                 kwartier worden aangegeven. Ook kan er op de startknop worden gedrukt 
                 (onderaan het eind van de slider), waardoor een animatie afgespeeld wordt.")),
     sliderInput(inputId = "time", 
                 label = "Stel maar in!",
                 min = as.POSIXct("00:00", format = "%H:%M"),
                 max = as.POSIXct("23:45", format = "%H:%M"),
-                value = c(as.POSIXct("00:00", format = "%H:%M")),
+                value = c(as.POSIXct("12:00", format = "%H:%M")),
                 step = 60*15, 
                 timeFormat = "%H:%M", 
                 animate = animationOptions(interval = 500, loop = TRUE)),
@@ -93,4 +93,5 @@ shinyApp(
   }#,
   #options = list(height = 1200)
 )
+
 

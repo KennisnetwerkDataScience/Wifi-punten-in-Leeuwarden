@@ -2,7 +2,9 @@
 title: "Plot gemiddeld aantal bezoekers per dag"
 author: "D.R. Cirkel"
 date: "14 juni 2018"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
 ---
 
 ```{r setup, include=FALSE}
